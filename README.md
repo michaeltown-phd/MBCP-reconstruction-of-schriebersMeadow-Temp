@@ -14,7 +14,7 @@ There are four scripts here to take note of:
 There are several other files to note:
 1. A summary document that briefly explains the analysis here. 
 2. A presentation pdf.
-3. An appendix of the results from the ordinary least squares analysis
+3. An appendix of the results from the ordinary least squares analysis (appendix1-MBCPtemperatureReconstruction-michael-town.txt)
 
 These results are preliminary. Please contact me with any questions.
 
