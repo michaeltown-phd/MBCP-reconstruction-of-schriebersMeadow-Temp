@@ -1,0 +1,416 @@
+Contact michael town - michaelstown@protonmail.com with any questions regarding this analysis
+
+Appendix:
+The data below represent a series of experiments to determine the features that best predict the model for the reconstruction of temperature for Mt. Baker, WA USA.
+
+NOTES: 
+1. Below Tc indicates Heather Meadows data.
+
+
+--> results from pdT vs schrieber's meadow, these results are shown in Figure 1.
+
+In [18]: print(resultsT.summary())
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                   Tc_y   R-squared:                       0.758
+Model:                            OLS   Adj. R-squared:                  0.757
+Method:                 Least Squares   F-statistic:                     1016.
+Date:                Fri, 10 Dec 2021   Prob (F-statistic):          4.98e-102
+Time:                        10:12:45   Log-Likelihood:                -862.03
+No. Observations:                 327   AIC:                             1728.
+Df Residuals:                     325   BIC:                             1736.
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const          1.3246      0.207      6.399      0.000       0.917       1.732
+Tc_x           0.8158      0.026     31.869      0.000       0.765       0.866
+==============================================================================
+Omnibus:                      179.053   Durbin-Watson:                   2.041
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             2597.970
+Skew:                           1.912   Prob(JB):                         0.00
+Kurtosis:                      16.269   Cond. No.                         8.96
+==============================================================================
+
+some specific results from this are shown in the MVP figure
+
+
+-->next results using average daily wind speed
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                  Tc_ss   R-squared:                       0.759
+Model:                            OLS   Adj. R-squared:                  0.758
+Method:                 Least Squares   F-statistic:                     510.9
+Date:                Fri, 10 Dec 2021   Prob (F-statistic):          6.53e-101
+Time:                        11:47:37   Log-Likelihood:                -860.90
+No. Observations:                 327   AIC:                             1728.
+Df Residuals:                     324   BIC:                             1739.
+Df Model:                           2                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const          0.8981      0.352      2.552      0.011       0.206       1.590
+Tc_pd          0.8232      0.026     31.628      0.000       0.772       0.874
+wsAvgMs        0.1040      0.069      1.497      0.135      -0.033       0.241
+==============================================================================
+Omnibus:                      190.730   Durbin-Watson:                   2.042
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             3000.594
+Skew:                           2.058   Prob(JB):                         0.00
+Kurtosis:                      17.258   Cond. No.                         15.7
+==============================================================================
+
+--> these results below from the dummy variables around season 
+base case is djf
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                  Tc_ss   R-squared:                       0.842
+Model:                            OLS   Adj. R-squared:                  0.840
+Method:                 Least Squares   F-statistic:                     342.7
+Date:                Fri, 10 Dec 2021   Prob (F-statistic):          2.33e-126
+Time:                        13:15:09   Log-Likelihood:                -791.81
+No. Observations:                 327   AIC:                             1596.
+Df Residuals:                     321   BIC:                             1618.
+Df Model:                           5                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const         -0.8130      0.414     -1.965      0.050      -1.627       0.001
+Tc_pd          0.6096      0.028     21.984      0.000       0.555       0.664
+wsAvgMs        0.1170      0.059      1.995      0.047       0.002       0.232
+jja            6.5189      0.580     11.237      0.000       5.378       7.660
+mam            0.5806      0.460      1.262      0.208      -0.325       1.486
+son            2.8365      0.469      6.045      0.000       1.913       3.760
+==============================================================================
+Omnibus:                      151.449   Durbin-Watson:                   1.947
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             1466.758
+Skew:                           1.658   Prob(JB):                         0.00
+Kurtosis:                      12.831   Cond. No.                         43.8
+==============================================================================
+
+-->results when the wind direction is taken into account.
+base case is N-NE category
+
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                  Tc_ss   R-squared:                       0.763
+Model:                            OLS   Adj. R-squared:                  0.760
+Method:                 Least Squares   F-statistic:                     207.1
+Date:                Fri, 10 Dec 2021   Prob (F-statistic):           3.60e-98
+Time:                        13:49:21   Log-Likelihood:                -858.08
+No. Observations:                 327   AIC:                             1728.
+Df Residuals:                     321   BIC:                             1751.
+Df Model:                           5                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const          0.8545      0.478      1.787      0.075      -0.086       1.795
+Tc_pd          0.8151      0.027     30.473      0.000       0.763       0.868
+wsAvgMs        0.0947      0.073      1.302      0.194      -0.048       0.238
+N-NW          -2.8046      1.571     -1.785      0.075      -5.896       0.286
+S              0.2871      0.505      0.568      0.570      -0.707       1.281
+W             -0.5851      0.800     -0.732      0.465      -2.159       0.988
+==============================================================================
+Omnibus:                      194.641   Durbin-Watson:                   2.058
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             3081.892
+Skew:                           2.116   Prob(JB):                         0.00
+Kurtosis:                      17.432   Cond. No.                         70.4
+==============================================================================
+
+--> next adding both season and wind direction into the mix
+base case - N-NE and djf
+
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                  Tc_ss   R-squared:                       0.843
+Model:                            OLS   Adj. R-squared:                  0.839
+Method:                 Least Squares   F-statistic:                     213.9
+Date:                Fri, 10 Dec 2021   Prob (F-statistic):          4.28e-123
+Time:                        13:57:15   Log-Likelihood:                -790.67
+No. Observations:                 327   AIC:                             1599.
+Df Residuals:                     318   BIC:                             1633.
+Df Model:                           8                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const         -0.6473      0.505     -1.281      0.201      -1.641       0.347
+Tc_pd          0.6083      0.028     21.715      0.000       0.553       0.663
+wsAvgMs        0.1179      0.062      1.903      0.058      -0.004       0.240
+N-NW          -1.5971      1.289     -1.239      0.216      -4.134       0.939
+S             -0.0307      0.418     -0.073      0.941      -0.853       0.792
+W             -0.5120      0.665     -0.769      0.442      -1.821       0.797
+jja            6.3889      0.590     10.823      0.000       5.227       7.550
+mam            0.4876      0.471      1.035      0.301      -0.439       1.414
+son            2.7610      0.475      5.816      0.000       1.827       3.695
+==============================================================================
+Omnibus:                      152.021   Durbin-Watson:                   1.952
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             1461.268
+Skew:                           1.669   Prob(JB):                         0.00
+Kurtosis:                      12.803   Cond. No.                         71.0
+==============================================================================
+
+
+--> added the heather meadows numbers into the plot
+base case - drizzle, djf, N-NE
+
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                  Tc_ss   R-squared:                       0.935
+Model:                            OLS   Adj. R-squared:                  0.932
+Method:                 Least Squares   F-statistic:                     373.8
+Date:                Fri, 10 Dec 2021   Prob (F-statistic):          7.26e-178
+Time:                        14:23:46   Log-Likelihood:                -647.87
+No. Observations:                 327   AIC:                             1322.
+Df Residuals:                     314   BIC:                             1371.
+Df Model:                          12                                         
+Covariance Type:            nonrobust                                         
+=================================================================================
+                    coef    std err          t      P>|t|      [0.025      0.975]
+---------------------------------------------------------------------------------
+const            -0.4118      0.328     -1.256      0.210      -1.057       0.233
+Tc_pd            -0.0995      0.040     -2.465      0.014      -0.179      -0.020
+Tc                0.9062      0.045     20.288      0.000       0.818       0.994
+wsAvgMs          -0.0680      0.047     -1.454      0.147      -0.160       0.024
+N-NW             -0.0440      0.222     -0.198      0.843      -0.482       0.394
+S                -1.1984      0.826     -1.451      0.148      -2.823       0.426
+W                 0.1447      0.360      0.402      0.688      -0.564       0.853
+jja               3.6373      0.407      8.939      0.000       2.837       4.438
+mam               0.0635      0.306      0.208      0.836      -0.538       0.665
+son               1.2949      0.320      4.051      0.000       0.666       1.924
+heavy rain    -4.064e-16   1.65e-16     -2.464      0.014   -7.31e-16   -8.19e-17
+light rain        0.6407      0.351      1.826      0.069      -0.050       1.331
+moderate rain     0.4927      0.564      0.873      0.383      -0.618       1.603
+no rain          -1.3816      0.250     -5.517      0.000      -1.874      -0.889
+==============================================================================
+Omnibus:                      132.298   Durbin-Watson:                   2.054
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             3041.019
+Skew:                           1.096   Prob(JB):                         0.00
+Kurtosis:                      17.778   Cond. No.                     8.23e+17
+==============================================================================
+
+
+--> OK, removing the pan dome temperature data, including pan dome ws, and then including heather meadows temperature, and looking at the same categories
+
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                  Tc_ss   R-squared:                       0.933
+Model:                            OLS   Adj. R-squared:                  0.931
+Method:                 Least Squares   F-statistic:                     400.8
+Date:                Fri, 10 Dec 2021   Prob (F-statistic):          7.13e-178
+Time:                        14:28:14   Log-Likelihood:                -651.00
+No. Observations:                 327   AIC:                             1326.
+Df Residuals:                     315   BIC:                             1371.
+Df Model:                          11                                         
+Covariance Type:            nonrobust                                         
+=================================================================================
+                    coef    std err          t      P>|t|      [0.025      0.975]
+---------------------------------------------------------------------------------
+const            -0.3246      0.329     -0.988      0.324      -0.971       0.322
+Tc                0.8093      0.021     37.866      0.000       0.767       0.851
+wsAvgMs          -0.0583      0.047     -1.241      0.216      -0.151       0.034
+N-NW              0.0009      0.223      0.004      0.997      -0.439       0.441
+S                -1.1938      0.832     -1.434      0.152      -2.831       0.444
+W                 0.1386      0.363      0.382      0.703      -0.575       0.853
+jja               3.6704      0.410      8.954      0.000       2.864       4.477
+mam               0.0238      0.308      0.077      0.938      -0.582       0.629
+son               1.3307      0.322      4.134      0.000       0.697       1.964
+heavy rain    -9.195e-17   2.23e-16     -0.413      0.680    -5.3e-16    3.46e-16
+light rain        0.6407      0.354      1.811      0.071      -0.055       1.337
+moderate rain     0.4460      0.569      0.784      0.433      -0.673       1.565
+no rain          -1.3969      0.252     -5.536      0.000      -1.893      -0.900
+==============================================================================
+Omnibus:                      125.824   Durbin-Watson:                   2.060
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             2896.118
+Skew:                           1.008   Prob(JB):                         0.00
+Kurtosis:                      17.439   Cond. No.                     9.97e+17
+==============================================================================
+
+--> removed pan dome temperature and wind speed, keeping pan dome wind direction
+using heather meadows temperature
+
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                  Tc_ss   R-squared:                       0.933
+Model:                            OLS   Adj. R-squared:                  0.931
+Method:                 Least Squares   F-statistic:                     440.0
+Date:                Fri, 10 Dec 2021   Prob (F-statistic):          7.13e-179
+Time:                        14:31:56   Log-Likelihood:                -651.80
+No. Observations:                 327   AIC:                             1326.
+Df Residuals:                     316   BIC:                             1367.
+Df Model:                          10                                         
+Covariance Type:            nonrobust                                         
+=================================================================================
+                    coef    std err          t      P>|t|      [0.025      0.975]
+---------------------------------------------------------------------------------
+const            -0.5699      0.263     -2.169      0.031      -1.087      -0.053
+Tc                0.8081      0.021     37.816      0.000       0.766       0.850
+N-NW              0.0108      0.224      0.049      0.961      -0.429       0.451
+S                -1.1031      0.830     -1.329      0.185      -2.736       0.530
+W                 0.2228      0.357      0.625      0.533      -0.479       0.925
+jja               3.7179      0.408      9.102      0.000       2.914       4.522
+mam               0.0590      0.307      0.192      0.848      -0.545       0.662
+son               1.3048      0.321      4.059      0.000       0.672       1.937
+heavy rain     1.017e-15   9.14e-16      1.113      0.267   -7.81e-16    2.81e-15
+light rain        0.4980      0.335      1.487      0.138      -0.161       1.157
+moderate rain     0.1835      0.528      0.347      0.728      -0.856       1.223
+no rain          -1.3393      0.248     -5.395      0.000      -1.828      -0.851
+==============================================================================
+Omnibus:                      123.332   Durbin-Watson:                   2.063
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             2813.077
+Skew:                           0.977   Prob(JB):                         0.00
+Kurtosis:                      17.235   Cond. No.                     1.32e+18
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The smallest eigenvalue is 1.43e-32. This might indicate that there are
+strong multicollinearity problems or that the design matrix is singular.
+
+
+
+-->heather meadows temp data (Tc) has highest r2 for relationship, this is the
+model used in Figures 4/5.
+
+==============================================================================
+Dep. Variable:                  Tc_ss   R-squared:                       0.932
+Model:                            OLS   Adj. R-squared:                  0.931
+Method:                 Least Squares   F-statistic:                     629.4
+Date:                Fri, 10 Dec 2021   Prob (F-statistic):          1.62e-182
+Time:                        14:34:34   Log-Likelihood:                -653.02
+No. Observations:                 327   AIC:                             1322.
+Df Residuals:                     319   BIC:                             1352.
+Df Model:                           7                                         
+Covariance Type:            nonrobust                                         
+=================================================================================
+                    coef    std err          t      P>|t|      [0.025      0.975]
+---------------------------------------------------------------------------------
+const            -0.5771      0.245     -2.358      0.019      -1.059      -0.096
+Tc                0.8086      0.021     38.612      0.000       0.767       0.850
+jja               3.7165      0.408      9.110      0.000       2.914       4.519
+mam               0.0479      0.305      0.157      0.875      -0.551       0.647
+son               1.3120      0.320      4.095      0.000       0.682       1.942
+heavy rain     2.566e-15   9.81e-16      2.616      0.009    6.36e-16     4.5e-15
+light rain        0.5200      0.334      1.557      0.121      -0.137       1.177
+moderate rain     0.1877      0.521      0.361      0.719      -0.837       1.212
+no rain          -1.3055      0.237     -5.505      0.000      -1.772      -0.839
+==============================================================================
+Omnibus:                      117.216   Durbin-Watson:                   2.026
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             2794.552
+Skew:                           0.879   Prob(JB):                         0.00
+Kurtosis:                      17.213   Cond. No.                     1.41e+17
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The smallest eigenvalue is 1.26e-30. This might indicate that there are
+strong multicollinearity problems or that the design matrix is singular.
+
+
+
+--> just mam result - Figures 2/3 
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                  Tc_ss   R-squared:                       0.750
+Model:                            OLS   Adj. R-squared:                  0.747
+Method:                 Least Squares   F-statistic:                     239.6
+Date:                Sun, 12 Dec 2021   Prob (F-statistic):           8.93e-26
+Time:                        13:14:52   Log-Likelihood:                -181.11
+No. Observations:                  82   AIC:                             366.2
+Df Residuals:                      80   BIC:                             371.0
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const         -0.8624      0.296     -2.917      0.005      -1.451      -0.274
+Tc             0.7229      0.047     15.478      0.000       0.630       0.816
+==============================================================================
+Omnibus:                        5.968   Durbin-Watson:                   2.160
+Prob(Omnibus):                  0.051   Jarque-Bera (JB):                5.282
+Skew:                          -0.590   Prob(JB):                       0.0713
+Kurtosis:                       3.392   Cond. No.                         7.66
+==============================================================================
+
+-->jja results Figures 2/3
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                  Tc_ss   R-squared:                       0.797
+Model:                            OLS   Adj. R-squared:                  0.794
+Method:                 Least Squares   F-statistic:                     310.3
+Date:                Sun, 12 Dec 2021   Prob (F-statistic):           4.38e-29
+Time:                        13:35:52   Log-Likelihood:                -179.43
+No. Observations:                  81   AIC:                             362.9
+Df Residuals:                      79   BIC:                             367.6
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const          2.5401      0.625      4.063      0.000       1.296       3.784
+Tc             0.8128      0.046     17.614      0.000       0.721       0.905
+==============================================================================
+Omnibus:                       90.883   Durbin-Watson:                   2.384
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             1209.186
+Skew:                           3.439   Prob(JB):                    2.68e-263
+Kurtosis:                      20.634   Cond. No.                         34.1
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+
+
+-->son results Figures 2/3
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                  Tc_ss   R-squared:                       0.850
+Model:                            OLS   Adj. R-squared:                  0.848
+Method:                 Least Squares   F-statistic:                     447.3
+Date:                Sun, 12 Dec 2021   Prob (F-statistic):           2.84e-34
+Time:                        13:35:52   Log-Likelihood:                -165.27
+No. Observations:                  81   AIC:                             334.5
+Df Residuals:                      79   BIC:                             339.3
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const          0.7158      0.303      2.365      0.020       0.113       1.318
+Tc             0.7858      0.037     21.150      0.000       0.712       0.860
+==============================================================================
+Omnibus:                       21.528   Durbin-Watson:                   2.330
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               28.609
+Skew:                          -1.217   Prob(JB):                     6.13e-07
+Kurtosis:                       4.597   Cond. No.                         11.9
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+
+---> djf results Figures 2/3
+djf results
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                  Tc_ss   R-squared:                       0.733
+Model:                            OLS   Adj. R-squared:                  0.730
+Method:                 Least Squares   F-statistic:                     217.4
+Date:                Sun, 12 Dec 2021   Prob (F-statistic):           2.15e-24
+Time:                        19:46:53   Log-Likelihood:                -147.11
+No. Observations:                  81   AIC:                             298.2
+Df Residuals:                      79   BIC:                             303.0
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const         -0.9223      0.192     -4.815      0.000      -1.304      -0.541
+Tc             0.7046      0.048     14.746      0.000       0.610       0.800
+==============================================================================
+Omnibus:                       22.731   Durbin-Watson:                   1.771
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               30.065
+Skew:                          -1.329   Prob(JB):                     2.96e-07
+Kurtosis:                       4.357   Cond. No.                         4.66
+==============================================================================
